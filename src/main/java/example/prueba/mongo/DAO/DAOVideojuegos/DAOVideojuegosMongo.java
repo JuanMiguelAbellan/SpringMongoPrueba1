@@ -44,8 +44,11 @@ public class DAOVideojuegosMongo implements DAOVideojuego {
         for (Document d : document){
             Videojuego videojuego = new Videojuego();
             videojuego.setNombre(d.getString("nombre"))
-                            .setAño(d.getInteger("año"))
+
                                     .setGenero(new Genero().setNombre(d.getString("genero.nombre")).setId(d.getString("genero.id")));
+            if(d.getInteger("año") != null){
+                videojuego.setAño(d.getInteger("año"));
+            }
             videojuegos.add(videojuego);
         }
         return videojuegos;
